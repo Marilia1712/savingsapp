@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/custom/common.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/packages/jquery.min.js"></script>
+    <script src="js/packages/bootstrap.min.js"></script>
+    <link media="all" type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <title>Grafici Guadagni</title>
+</head>
+<body>
+<div class="container my-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-sm-3 g-4">
+      <div class="col">
+        <canvas id="IncCatChart" style="width:40vw;max-width:50vw;height:40vh;max-height:50vh"></canvas>
+      </div>
+      <div class="col">
+        <canvas id="IncMemChart" style="width:40vw;max-width:50vw;height:40vh;max-height:50vh"></canvas>
+      </div>
+      <div class="col">
+        <canvas id="IncLocChart" style="width:40vw;max-width:50vw;height:40vh;max-height:50vh"></canvas>
+      </div>
+      <div class="col">
+        <canvas id="IncAccChart" style="width:40vw;max-width:50vw;height:40vh;max-height:50vh"></canvas>
+      </div>
+    </div>
+  </div>
+
+    <script>
+
+        $(function () {
+
+        $.get(incomesCatPiechart, function (response) {
+            
+            if(response) {
+                const labels = response.map(obj => obj.NomeCatGuad);
+                const values = response.map(obj => obj.PercentualeGuadagni);
+
+            var chart = {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '',
+                    data: values,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1.0)',
+                        'rgba(54, 162, 235, 1.0)',
+                        'rgba(255, 206, 86, 1.0)',
+                        'rgba(75, 192, 192, 1.0)',
+                        'rgba(153, 102, 255, 1.0)',
+                        'rgba(255, 159, 64, 1.0)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+
+            const ctx = document.getElementById('IncCatChart').getContext('2d');
+            const myChart = new Chart(ctx, chart);
+            }
+        });
+        });
+
+        
+        $(function () {
+
+        $.get(incomesMemPiechart, function (response) {
+            
+            if(response) {
+                const labels = response.map(obj => obj.NomeMembro);
+                const values = response.map(obj => obj.PercentualeGuadagni);
+
+            var chart1 = {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '',
+                    data: values,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1.0)',
+                        'rgba(54, 162, 235, 1.0)',
+                        'rgba(255, 206, 86, 1.0)',
+                        'rgba(75, 192, 192, 1.0)',
+                        'rgba(153, 102, 255, 1.0)',
+                        'rgba(255, 159, 64, 1.0)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+
+            const ctx = document.getElementById('IncMemChart').getContext('2d');
+            const myChart1 = new Chart(ctx, chart1);
+            }
+        });
+        });
+
+        $(function () {
+
+        $.get(incomesLocPiechart, function (response) {
+            
+            if(response) {
+                const labels = response.map(obj => obj.NomeLocalita);
+                const values = response.map(obj => obj.PercentualeGuadagni);
+                console.log(labels)
+                console.log(values)
+
+            var chart1 = {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '',
+                    data: values,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1.0)',
+                        'rgba(54, 162, 235, 1.0)',
+                        'rgba(255, 206, 86, 1.0)',
+                        'rgba(75, 192, 192, 1.0)',
+                        'rgba(153, 102, 255, 1.0)',
+                        'rgba(255, 159, 64, 1.0)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+
+            const ctx = document.getElementById('IncLocChart').getContext('2d');
+            const myChart1 = new Chart(ctx, chart1);
+            }
+        });
+        });
+
+
+        $(function () {
+
+        $.get(incomesAccPiechart, function (response) {
+            
+            if(response) {
+                const labels = response.map(obj => obj.NomeConto);
+                const values = response.map(obj => obj.PercentualeGuadagni);
+
+            var chart1 = {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '',
+                    data: values,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1.0)',
+                        'rgba(54, 162, 235, 1.0)',
+                        'rgba(255, 206, 86, 1.0)',
+                        'rgba(75, 192, 192, 1.0)',
+                        'rgba(153, 102, 255, 1.0)',
+                        'rgba(255, 159, 64, 1.0)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+
+            const ctx = document.getElementById('IncAccChart').getContext('2d');
+            const myChart1 = new Chart(ctx, chart1);
+            }
+        });
+        });
+
+
+    </script>
+</body>
+</html>
